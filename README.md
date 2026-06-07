@@ -2,7 +2,7 @@
 
 Stop a rogue agent before it acts, and prove what it tried. This is an n8n community node that sends each workflow action to Asqav for a policy decision before it commits, and attaches a verifiable record to the item.
 
-Asqav is an AI agent governance service. It checks the action against your policies and signs the outcome server-side with post-quantum cryptography (ML-DSA): a permitted action returns a receipt you can verify independently, and a denied action is refused at the API with a forensic record of the attempt rather than a permissive receipt. This node wraps the Asqav TypeScript SDK (`@asqav/sdk`).
+Asqav is an AI agent governance service. It checks the action against your policies and signs the outcome server-side with post-quantum cryptography (ML-DSA). A permitted action returns a receipt you can verify independently. A denied action is refused at the API and leaves a forensic record of the attempt, never a permissive receipt. This node wraps the Asqav TypeScript SDK (`@asqav/sdk`).
 
 This node is built and maintained by the Asqav team.
 
