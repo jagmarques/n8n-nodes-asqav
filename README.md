@@ -2,7 +2,7 @@
 
 Stop a rogue agent before it acts, and prove what it tried. This is an n8n community node that sends each workflow action to Asqav for a policy decision before it commits, and attaches a verifiable record to the item.
 
-Asqav is an AI agent governance service. It checks the action against your policies and signs the outcome server-side with post-quantum cryptography (ML-DSA). A permitted action returns a receipt you can verify independently. A denied action is refused at the API and leaves a forensic record of the attempt, never a permissive receipt. This node wraps the Asqav TypeScript SDK (`@asqav/sdk`).
+Asqav is an AI agent governance service. It checks the action against your policies and signs the outcome server-side with post-quantum ML-DSA cryptography. A permitted action returns a receipt you can verify independently. A denied action is refused at the API and leaves a forensic record of the attempt, never a permissive receipt. This node wraps the Asqav TypeScript SDK (`@asqav/sdk`).
 
 This node is built and maintained by the Asqav team.
 
@@ -35,13 +35,13 @@ The receipt object includes `signatureId`, `actionId`, `signature`, `verificatio
 
 ### Parameters
 
-- Action Type (string, required): namespaced action identifier, for example `api:call`.
-- Context (JSON, optional): object bound into the signed receipt. Sent verbatim.
-- Options (collection, optional):
-  - Agent Name (default `n8n`)
-  - Receipt Type (IETF Compliance Receipts namespace)
-  - Risk Class (`low`, `medium`, `high`, `unknown`)
-  - Compliance Mode (boolean)
+- Action Type: a required string holding the namespaced action identifier, for example `api:call`.
+- Context: an optional JSON object bound into the signed receipt. Sent verbatim.
+- Options, an optional collection:
+  - Agent Name, default `n8n`
+  - Receipt Type, an IETF Compliance Receipts namespace
+  - Risk Class: `low`, `medium`, `high`, or `unknown`
+  - Compliance Mode, a boolean
 
 The node honours "Continue On Fail". When enabled, a failing item passes through with an `error` field instead of stopping the workflow.
 
