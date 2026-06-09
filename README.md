@@ -17,7 +17,16 @@ This node is built and maintained by the Asqav team.
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation. Install by the npm package name:
+Not yet published to npm. Until the release lands, build from source:
+
+```
+git clone https://github.com/jagmarques/n8n-nodes-asqav.git
+cd n8n-nodes-asqav
+npm install
+npm run build
+```
+
+Once the package is live, follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation and install by the npm package name:
 
 ```
 n8n-nodes-asqav
