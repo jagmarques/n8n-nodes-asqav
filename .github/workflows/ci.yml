@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build dry run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+      # npm install (not ci): tolerates the pre-existing lockfile hoist drift
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build --if-present
+      - name: Test
+        run: npm test --if-present
+      - name: Pack (publish dry run)
+        run: npm pack --dry-run
+
+  ci-ok:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - run: echo "CI passed"

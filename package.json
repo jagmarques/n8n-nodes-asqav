@@ -30,7 +30,8 @@
 		"prepublishOnly": "n8n-node prerelease"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"CHANGELOG.md"
 	],
 	"n8n": {
 		"n8nNodesApiVersion": 1,
@@ -43,7 +44,7 @@
 		]
 	},
 	"dependencies": {
-		"@asqav/sdk": "^0.5.3"
+		"@asqav/sdk": "^0.8.0"
 	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",
