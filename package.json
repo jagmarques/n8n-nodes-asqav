@@ -43,7 +43,7 @@
 		]
 	},
 	"dependencies": {
-		"@asqav/sdk": "^0.5.3"
+		"@asqav/sdk": "^0.8.0"
 	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",
