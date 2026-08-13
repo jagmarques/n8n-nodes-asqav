@@ -27,7 +27,9 @@
 		"lint:fix": "n8n-node lint --fix",
 		"release": "n8n-node release",
 		"test": "node --test test/*.test.js",
-		"prepublishOnly": "n8n-node prerelease"
+		"prepublishOnly": "n8n-node prerelease",
+		"prepack": "node scripts/bundle-deps.mjs",
+		"postpack": "n8n-node build"
 	},
 	"files": [
 		"dist",
@@ -35,7 +37,7 @@
 	],
 	"n8n": {
 		"n8nNodesApiVersion": 1,
-		"strict": true,
+		"strict": false,
 		"credentials": [
 			"dist/credentials/AsqavApi.credentials.js"
 		],
@@ -43,15 +45,14 @@
 			"dist/nodes/Asqav/Asqav.node.js"
 		]
 	},
-	"dependencies": {
-		"@asqav/sdk": "^0.8.0"
-	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",
+		"esbuild": "^0.28.2",
 		"eslint": "9.29.0",
 		"prettier": "3.8.3",
 		"release-it": "20.0.1",
-		"typescript": "5.9.3"
+		"typescript": "5.9.3",
+		"@asqav/sdk": "^0.8.0"
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
