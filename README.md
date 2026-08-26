@@ -19,19 +19,21 @@ This node is built and maintained by the Asqav team.
 
 ## Installation
 
-Not yet published to npm. Until the release lands, build from source:
+Published to npm as `n8n-nodes-asqav`, with SLSA provenance attestations from the GitHub Actions
+publish workflow. Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/)
+in the n8n community nodes documentation and install by the npm package name:
+
+```
+n8n-nodes-asqav
+```
+
+The node runs on self-hosted n8n. To build from source instead:
 
 ```
 git clone https://github.com/jagmarques/n8n-nodes-asqav.git
 cd n8n-nodes-asqav
 npm install
 npm run build
-```
-
-Once the package is live, follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation and install by the npm package name:
-
-```
-n8n-nodes-asqav
 ```
 
 ## Operations
@@ -79,5 +81,6 @@ Import it from the n8n canvas (Import from File), attach an Asqav API credential
 ## Resources
 
 - [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
+- [n8n-nodes-asqav on npm](https://www.npmjs.com/package/n8n-nodes-asqav)
 - [Asqav](https://asqav.com)
 - [@asqav/sdk on npm](https://www.npmjs.com/package/@asqav/sdk)
