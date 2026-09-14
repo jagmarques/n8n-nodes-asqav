@@ -23,7 +23,7 @@ function installSdkMock() {
 					name: opts.name,
 					async sign(signOptions) {
 						signCalls.push(signOptions);
-						// Deterministic mocked receipt keyed off the action type.
+						// Deterministic mocked receipt keyed off the action type
 						return {
 							signature: 'base64-sig',
 							signatureId: `sig_${signCalls.length}`,
@@ -46,7 +46,7 @@ function installSdkMock() {
 
 installSdkMock();
 
-// Require the compiled node AFTER the mock is in the cache.
+// Require the compiled node AFTER the mock is in the cache
 const { Asqav } = require(path.join(PKG_ROOT, 'dist/nodes/Asqav/Asqav.node.js'));
 
 // --- Minimal IExecuteFunctions harness ---
@@ -91,16 +91,15 @@ test('signs two input items and attaches the mocked receipt to each', async () =
 	const node = new Asqav();
 	const result = await node.execute.call(ctx);
 
-	// One output branch.
 	assert.strictEqual(result.length, 1);
 	const out = result[0];
 	assert.strictEqual(out.length, 2);
 
-	// init() called once per execute with the credential key.
+	// init() called once per execute with the credential key
 	assert.strictEqual(initCalls.length, 1);
 	assert.deepStrictEqual(initCalls[0], { apiKey: 'sk_test_123' });
 
-	// Each output item carries the mocked signatureId and preserves original json.
+	// Each output item carries the mocked signatureId and preserves original json
 	assert.strictEqual(out[0].json.a, 1);
 	assert.strictEqual(out[0].json.asqavReceipt.signatureId, 'sig_1');
 	assert.strictEqual(out[0].json.asqavReceipt.verificationUrl.includes('sig_1'), true);
@@ -108,12 +107,11 @@ test('signs two input items and attaches the mocked receipt to each', async () =
 	assert.strictEqual(out[1].json.b, 2);
 	assert.strictEqual(out[1].json.asqavReceipt.signatureId, 'sig_2');
 
-	// sign() received the right actionType/context per item.
+	// sign() received the right actionType/context per item
 	assert.strictEqual(signCalls[0].actionType, 'api:call');
 	assert.deepStrictEqual(signCalls[0].context, { model: 'gpt-4' });
 	assert.strictEqual(signCalls[1].actionType, 'tool:invoke');
 
-	// pairedItem wired correctly.
 	assert.deepStrictEqual(out[0].pairedItem, { item: 0 });
 	assert.deepStrictEqual(out[1].pairedItem, { item: 1 });
 });
@@ -135,7 +133,7 @@ test('parses a JSON string context value', async () => {
 test('continueOnFail passes failing item through with an error field', async () => {
 	signCalls.length = 0;
 
-	// Reinstall an SDK mock whose sign() throws on the first item.
+	// Reinstall an SDK mock whose sign() throws on the first item
 	const sdkPath = require.resolve('@asqav/sdk', { paths: [PKG_ROOT] });
 	let call = 0;
 	require.cache[sdkPath].exports.Agent.create = async (opts) => ({
@@ -165,10 +163,9 @@ test('continueOnFail passes failing item through with an error field', async () 
 	const out = result[0];
 
 	assert.strictEqual(out.length, 2);
-	// First item failed -> error field, original json preserved, no receipt.
+	// First item failed -> error field, original json preserved, no receipt
 	assert.strictEqual(out[0].json.a, 1);
 	assert.strictEqual(out[0].json.error, 'boom from sign');
 	assert.strictEqual(out[0].json.asqavReceipt, undefined);
-	// Second item succeeded.
 	assert.strictEqual(out[1].json.asqavReceipt.signatureId, 'sig_2');
 });
