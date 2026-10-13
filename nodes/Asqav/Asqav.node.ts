@@ -102,7 +102,7 @@ export class Asqav implements INodeType {
 	};
 
 	// Signing happens here, on execute. n8n community nodes have no install or
-	// load-time hook, so every receipt is produced as the workflow runs.
+	// load-time hook, so every receipt is produced as the workflow runs
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
@@ -111,7 +111,7 @@ export class Asqav implements INodeType {
 		const apiKey = credentials.apiKey as string;
 
 		// init() sets module-global SDK config; call it per execution because the
-		// config is mutable global state that another node could have changed.
+		// config is mutable global state that another node could have changed
 		init({ apiKey });
 
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
