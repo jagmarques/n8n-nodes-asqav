@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build dry run
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, hz-ci-light]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -17,7 +17,7 @@ jobs:
           node-version: 'lts/*'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
       - name: Build
         run: npm run build --if-present
       - name: Test
@@ -26,7 +26,7 @@ jobs:
         run: npm pack --dry-run
 
   ci-ok:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, hz-ci-light]
     needs: build
     steps:
       - run: echo "CI passed"
